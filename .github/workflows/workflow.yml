@@ -4,7 +4,7 @@ on:
   push:
   workflow_dispatch:
   schedule:
-    - cron: '11 * * * *'
+    - cron: '11,41 * * * *'
 
 jobs:
   run_script:
@@ -20,13 +20,7 @@ jobs:
       - name: Install libcurl
         run: sudo apt-get install libcurl4-openssl-dev
       - run: R -e 'install.packages(c("RSelenium", "rvest"))'
-      - run: R -e 'print("hello")'
       - run: Rscript scrap-signatures-count.R
-      - name: Archive results
-        uses: actions/upload-artifact@v2
-        with:
-          name: output-data
-          path: output.csv
       - name: Commit and push
         run: |-
           git config user.name "Automated"
