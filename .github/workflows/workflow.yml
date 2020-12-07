@@ -1,15 +1,14 @@
 name: scrap_signatures
 
-on: [push]
-#  schedule:
-#    - cron: '0 9 * * *'
+on:
+  push:
+  workflow_dispatch:
+  schedule:
+    - cron: '11 * * * *'
 
 jobs:
   run_script:
     runs-on: ubuntu-latest
-    # retrieve secrets from github
-    # env:
-        # apikey: ${{ secrets.APIKEY}}
     steps:
       - uses: actions/checkout@v2
       - name: run-selenium
@@ -28,4 +27,12 @@ jobs:
         with:
           name: output-data
           path: output.csv
+      - name: Commit and push
+        run: |-
+          git config user.name "Automated"
+          git config user.email "actions@users.noreply.github.com"
+          git add -A
+          timestamp=$(date -u)
+          git commit -m "Latest data: ${timestamp}" || exit 0
+          git push
 
