@@ -21,6 +21,7 @@ jobs:
         run: sudo apt-get install libcurl4-openssl-dev
       - run: R -e 'install.packages(c("RSelenium", "rvest", "ggplot2", "scales"))'
       - run: Rscript scrap-signatures-count.R
+      - run: Rscript chart-data.R
       - name: Commit and push
         run: |-
           git config user.name "Automated"
