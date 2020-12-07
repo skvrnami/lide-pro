@@ -1,5 +1,4 @@
 library(rvest)
-library(dplyr)
 library(RSelenium)
 
 url <- "https://lidepro.cz/podpisy"
@@ -22,20 +21,18 @@ remDr$navigate(url)
 time <- Sys.time()
 html <- remDr$getPageSource()
 
-signatures_count <- read_html(html[[1]]) %>%
-    html_node(".sign-count") %>%
-    html_text() %>%
-    gsub("\\s", "", .) %>%
-    as.numeric()
+html_source <- read_html(html[[1]])
+sign_text <- html_text(html_node(html_source, ".sign-count"))
+signatures_count <- as.numeric(gsub("\\s", "", sign_text))
 
 print(signatures_count)
 
-data <- tibble::tibble(
+data <- data.frame(
     time = as.character(time),
     signatures_count = signatures_count
 )
 
 old_data <- read.csv("output.csv")
-data <- bind_rows(old_data, data)
+data <- rbind(old_data, data)
 
 write.csv(data, "output.csv", row.names = FALSE)
