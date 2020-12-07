@@ -28,6 +28,8 @@ signatures_count <- read_html(html[[1]]) %>%
     gsub("\\s", "", .) %>%
     as.numeric()
 
+print(signatures_count)
+
 data <- tibble::tibble(
     time = as.character(time),
     signatures_count = signatures_count
