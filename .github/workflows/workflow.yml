@@ -1,0 +1,31 @@
+name: scrap_signatures
+
+#on:
+#  schedule:
+#    - cron: '0 9 * * *'
+
+jobs:
+  selenium:
+    runs-on: ubuntu-latest
+      container:
+        image: selenium/standalone-firefox:2.53.1
+        env:
+          HUB_HOST: hub
+          HUB_PORT: 4445
+  # This workflow contains a single job
+  run_script:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    # retrieve secrets from github
+    # env:
+        # apikey: ${{ secrets.APIKEY}}
+    steps:
+      - uses: actions/checkout@v2
+      - name: setup-r
+        uses: r-lib/actions/setup-r@v1
+        with:
+          r-version: '4.0.2'
+      - run: R -e 'install.packages(c("dplyr", "RSelenium", "rvest"))'
+      - run: R -e 'print("hello")'
+      #- run: Rscript scrap-signatures-count.R
+
