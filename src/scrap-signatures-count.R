@@ -32,7 +32,7 @@ data <- data.frame(
     signatures_count = signatures_count
 )
 
-old_data <- read.csv("output.csv")
+old_data <- read.csv("output/output.csv")
 data <- rbind(old_data, data)
 
-write.csv(data, "output.csv", row.names = FALSE)
+write.csv(data, "output/output.csv", row.names = FALSE)

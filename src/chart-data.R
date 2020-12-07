@@ -1,6 +1,6 @@
 library(ggplot2)
 
-data <- read.csv("output.csv")
+data <- read.csv("output/output.csv")
 data$time <- as.POSIXct(data$time, format = "%Y-%m-%d %H:%M:%S", tz = "UTC")
 
 one_third <- (max(data$time) - as.POSIXct("2020-12-03")) / 3
@@ -25,4 +25,4 @@ ggplot(data, aes(x = time, y = signatures_count)) +
          title = "Vývoj počtu sebraných podpisů hnutí Lidé PRO",
          caption = "Data: https://lidepro.cz/podpisy\nAutor: Michael Škvrňák\nZdrojový kód: github.com/skvrnami/lide-pro")
 
-ggsave("signatures.png")
+ggsave("output/signatures.png")
