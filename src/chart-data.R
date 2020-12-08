@@ -23,6 +23,35 @@ ggplot(data, aes(x = time, y = signatures_count)) +
     labs(x = "",
          y = "Počet sebraných podpisů",
          title = "Vývoj počtu sebraných podpisů hnutí Lidé PRO",
-         caption = "Data: https://lidepro.cz/podpisy\nAutor: Michael Škvrňák\nZdrojový kód: github.com/skvrnami/lide-pro")
+         caption = "Autor: Michael Škvrňák\nData: https://lidepro.cz/podpisy\nZdrojový kód: github.com/skvrnami/lide-pro")
 
 ggsave("output/signatures.png")
+
+data_start <- data.frame(
+    time = as.POSIXct("2020-12-03 08:00:00", tz = "UTC"),
+    signatures_count = 0
+)
+
+complete_data <- rbind(data_start, data)
+complete_data <- complete_data[-c(3), ]
+complete_data$lagged_time <- as.POSIXct(sapply(1:nrow(complete_data),
+                                               function(x) complete_data$time[x + 1]),
+                                        origin = "1970-01-01", tz = "UTC")
+complete_data$lagged_signatures <- sapply(1:nrow(complete_data),
+                                          function(x) complete_data$signatures_count[x + 1])
+complete_data$time_diff <- difftime(complete_data$lagged_time, complete_data$time, units = "mins")
+complete_data$signatures_diff <- complete_data$lagged_signatures - complete_data$signatures_count
+complete_data$signatures_p_h <- complete_data$signatures_diff / (as.numeric(complete_data$time_diff) / 60)
+
+ggplot(complete_data, aes(x = time, y = signatures_p_h)) +
+    geom_step() +
+    theme_minimal() +
+    scale_x_datetime(labels = scales::date_format("%d.%m.")) +
+    labs(x = "",
+         y = "Počet sebraných podpisů/hodinu",
+         title = "Rychlost sběru podpisů hnutí Lidé PRO",
+         caption = "Autor: Michael Škvrňák\nData: https://lidepro.cz/podpisy\nZdrojový kód: github.com/skvrnami/lide-pro")
+
+ggsave("output/signatures_speed.png")
+
+
