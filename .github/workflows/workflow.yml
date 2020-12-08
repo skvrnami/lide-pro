@@ -11,7 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-
       - name: run-selenium
         run: docker run -d -p 4445:4444 selenium/standalone-firefox:2.53.1
 
@@ -36,10 +35,10 @@ jobs:
           Rscript -e "install.packages('renv'); renv::restore(confirm = FALSE)"
 
       - name: Scrape data
-      - run: Rscript src/scrap-signatures-count.R
+        run: Rscript src/scrap-signatures-count.R
 
       - name: Make a chart
-      - run: Rscript src/chart-data.R
+        run: Rscript src/chart-data.R
 
       - name: Commit and push
         run: |-
