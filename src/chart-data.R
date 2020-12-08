@@ -25,7 +25,10 @@ ggplot(data, aes(x = time, y = signatures_count)) +
          title = "Vývoj počtu sebraných podpisů hnutí Lidé PRO",
          caption = "Autor: Michael Škvrňák\nData: https://lidepro.cz/podpisy\nZdrojový kód: github.com/skvrnami/lide-pro")
 
-ggsave("output/signatures.png")
+ggsave("output/signatures.png",
+       width = 6,
+       height = 4,
+       units = "in")
 
 data_start <- data.frame(
     time = as.POSIXct("2020-12-03 08:00:00", tz = "UTC"),
@@ -52,6 +55,9 @@ ggplot(complete_data, aes(x = time, y = signatures_p_h)) +
          title = "Rychlost sběru podpisů hnutí Lidé PRO",
          caption = "Autor: Michael Škvrňák\nData: https://lidepro.cz/podpisy\nZdrojový kód: github.com/skvrnami/lide-pro")
 
-ggsave("output/signatures_speed.png")
+ggsave("output/signatures_speed.png",
+       width = 6,
+       height = 4,
+       units = "in")
 
 
