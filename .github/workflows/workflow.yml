@@ -11,17 +11,35 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+
       - name: run-selenium
         run: docker run -d -p 4445:4444 selenium/standalone-firefox:2.53.1
+
       - name: setup-r
         uses: r-lib/actions/setup-r@v1
         with:
           r-version: '4.0.2'
+
       - name: Install libcurl
         run: sudo apt-get install libcurl4-openssl-dev
-      - run: R -e 'install.packages(c("RSelenium", "rvest", "ggplot2", "scales"))'
+
+      - uses: actions/cache@v2
+        with:
+          path: ~/.local/share/renv
+          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-renv-
+
+      - name: Install Package Dependencies
+        run: |-
+          Rscript -e "install.packages('renv'); renv::restore(confirm = FALSE)"
+
+      - name: Scrape data
       - run: Rscript src/scrap-signatures-count.R
+
+      - name: Make a chart
       - run: Rscript src/chart-data.R
+
       - name: Commit and push
         run: |-
           git config user.name "Automated"
