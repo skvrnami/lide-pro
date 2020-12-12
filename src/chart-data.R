@@ -18,7 +18,7 @@ ggplot(data, aes(x = time, y = signatures_count)) +
              label = "založení hnutí", hjust = "left") +
     theme_minimal() +
     # xlim(c(as.POSIXct("2020-12-03"), max(data$time))) +
-    ylim(c(0, max(data$signatures_count) * 1.2)) +
+    ylim(c(0, max(data$signatures_count, na.rm = TRUE) * 1.2)) +
     scale_x_datetime(labels = scales::date_format("%d.%m.")) +
     labs(x = "",
          y = "Počet sebraných podpisů",
