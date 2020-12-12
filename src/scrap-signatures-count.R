@@ -15,6 +15,7 @@ remDr <- remoteDriver(
     browserName = "firefox"
 )
 
+Sys.sleep(10)
 remDr$open()
 remDr$navigate(url)
 
