@@ -37,6 +37,7 @@ data_start <- data.frame(
 
 complete_data <- rbind(data_start, data)
 complete_data <- complete_data[-c(3), ]
+complete_data <- complete_data[!is.na(complete_data$signatures_count), ]
 complete_data$lagged_time <- as.POSIXct(sapply(1:nrow(complete_data),
                                                function(x) complete_data$time[x + 1]),
                                         origin = "1970-01-01", tz = "UTC")
