@@ -26,6 +26,16 @@ html_source <- read_html(html[[1]])
 sign_text <- html_text(html_node(html_source, ".sign-count"))
 signatures_count <- as.numeric(gsub("\\s", "", sign_text))
 
+if(is.na(signatures_count)){
+    Sys.sleep(5)
+
+    html <- remDr$getPageSource()
+
+    html_source <- read_html(html[[1]])
+    sign_text <- html_text(html_node(html_source, ".sign-count"))
+    signatures_count <- as.numeric(gsub("\\s", "", sign_text))
+}
+
 print(signatures_count)
 
 data <- data.frame(
