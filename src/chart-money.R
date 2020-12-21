@@ -14,7 +14,8 @@ money %>%
     geom_bar(stat = "identity") +
     theme_minimal() +
     scale_x_date(labels = scales::date_format("%d.%m.")) +
-    scale_y_continuous(breaks = c(250000, 0, -250000, -500000, -1000000)) +
+    scale_y_continuous(breaks = c(250000, 0, -250000, -500000, -1000000),
+                       labels = c("250 tis.", "0", "-250 tis.", "-500 tis.", "-1 mil.")) +
     theme(legend.position = "none") +
     labs(x = "", y = "Součet příjmů/výdajů (v CZK)",
          title = "Pohyby na transparentním účtu Lidé PRO",
