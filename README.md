@@ -1,12 +1,18 @@
 # README
 
-Skript pro scrapování počtu podpisů pro vznik hnutí Lidé PRO.
+Skript pro scrapování počtu podpisů pro vznik hnutí [Lidé PRO](https://lidepro.cz/) a pohybu na [transparentním účtu hnutí](https://ib.fio.cz/ib/transparent?a=20308993).
 
 ## Grafy
+
+### Podpisy
 
 ![](output/signatures.png)
 
 ![](output/signatures_speed.png)
+
+### Transparentní účet
+
+![](output/money.png)
 
 ## File manifest
 

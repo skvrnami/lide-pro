@@ -1,7 +1,6 @@
-name: scrap_signatures
+name: Scrap signatures
 
 on:
-  push:
   workflow_dispatch:
   schedule:
     - cron: '41 * * * *'
