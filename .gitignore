@@ -4,3 +4,4 @@
 .Ruserdata
 
 *.pdf
+node_modules/
