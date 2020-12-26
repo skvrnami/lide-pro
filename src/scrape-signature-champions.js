@@ -7,20 +7,21 @@ var fs = require("fs");
   await page.goto('https://lidepro.cz/podpisovi-sampioni', {waitUntil: 'networkidle2'});
 
   var huntersTable = await page.evaluate(() => {
+    var d = new Date();
+    var timestamp = d.toISOString();
     dv = document.getElementsByClassName("data-view");
-    console.log(dv[0])
-    return dv[0].innerText.replaceAll('\n\t', '\t')
+    text = dv[0].childNodes[3].innerText + '\n\n';
+    return text.replaceAll('\n\t', '\t')
+        .replaceAll('\n\n', '\t' + timestamp + '\n')
+        .replaceAll('\t', ';')
   });
 
-  fs.writeFile('champions.txt', huntersTable, function(err) {
+  fs.appendFile('output/champions.csv', huntersTable, function(err) {
     if (err) {
        return console.error(err);
     }
     console.log("Data written successfully!");
  });
-
-
-  await page.screenshot({path: 'example.png'});
 
   await browser.close();
 })();
