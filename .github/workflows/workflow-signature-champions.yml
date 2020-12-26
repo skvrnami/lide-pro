@@ -1,4 +1,4 @@
-name: Scrap signatures
+name: Scrap signature champions
 
 on:
   workflow_dispatch:
