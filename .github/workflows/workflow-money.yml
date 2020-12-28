@@ -37,7 +37,7 @@ jobs:
         run: Rscript src/scrap-transparent-account.R
 
       - name: Make a chart
-        run: Rscript src/chart-financial-data.R
+        run: Rscript src/chart-money.R
 
       - name: Commit and push
         run: |-
