@@ -29,9 +29,10 @@ construct_url <- function(base_url, start_date, end_date){
 }
 
 convert_amount <- function(x){
-    gsub("\\s", "", x) %>%
-        gsub("CZK", "", .) %>%
-        gsub(",", ".", .) %>%
+    gsub(",", ".", x) %>%
+        stringr::str_remove_all(., "\\s") %>%
+        stringr::str_remove_all(., "\u00A0") %>%
+        stringr::str_extract(., "[-0-9.]+") %>%
         as.numeric()
 }
 
