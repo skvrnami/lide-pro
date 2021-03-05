@@ -14,6 +14,8 @@ Skript pro scrapování počtu podpisů pro vznik hnutí [Lidé PRO](https://lid
 
 ![](output/money.png)
 
+![](output/money_count.png)
+
 ## File manifest
 
 - `src/scrap-signatures-count.R` - skript pro stáhnutí počtu podpisů uvedených na stránce [Lidé PRO](https://lidepro.cz/podpisy)  
