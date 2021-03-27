@@ -1,9 +1,9 @@
 name: Scrap financial transfers
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: '12 5 * * 1'
+  workflow_dispatch
+  #schedule:
+  #  - cron: '12 5 * * 1'
 
 jobs:
   run_script:

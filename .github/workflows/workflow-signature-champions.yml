@@ -1,9 +1,9 @@
 name: Scrap signature champions
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: '23 2 * * *'
+  workflow_dispatch
+  #schedule:
+  #  - cron: '23 2 * * *'
 
 jobs:
   run_script:

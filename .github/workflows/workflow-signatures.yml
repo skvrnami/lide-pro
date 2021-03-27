@@ -1,9 +1,9 @@
 name: Scrap signatures
 
 on:
-  workflow_dispatch:
-  schedule:
-    - cron: '41 * * * *'
+  workflow_dispatch
+  #schedule:
+  #  - cron: '41 * * * *'
 
 jobs:
   run_script:
